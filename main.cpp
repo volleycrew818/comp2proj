@@ -3,6 +3,7 @@
 #include <SDL/SDL_image.h>
 //#include "ball.h"
 #include "board.h"
+#include "SDL/SDL_mixer.h"
 using namespace std;
 
 int main(){
