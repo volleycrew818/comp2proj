@@ -17,8 +17,21 @@ Ball::Ball(){
 void Ball::move() {
     x += xv;
     y += yv;
-    if (x>500 || x<0) xv = -xv;
-    if (y>1000 || y<0) yv = -yv;
+        //left wall and start area
+    if (x>460 || x<0) xv = -xv;
+    //top curve (bounce off block of space), bottom of board
+    if (y>760 || y<118) yv = -yv;
+    //part of blocks
+    if (x>270 && y > 888 || x<190 && y > 888) 
+    {
+        xv=-xv;
+    	yv=-yv;
+    }
+    //part of blocks
+    if (x>270 && y > 724 || x<190 && y > 724) 
+    {
+    	xv=-xv;
+    	
 }
 
 void Ball::draw(SDL_Surface* screen){
