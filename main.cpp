@@ -10,9 +10,14 @@ reference gpwiki.org for SDL syntax
 #include <iostream>
 #include <SDL/SDL_ttf.h>
 #include "instructions.h"
+#include "SDL/SDL_mixer.h"
 #include <deque>
 using namespace std;
 
+//music
+Mix_Music *music = NULL;
+//music to be used
+Mix_Chunk *tune = NULL;
 int main(int argc, char* args[]) 
 {
   //initializes SDL
@@ -31,7 +36,21 @@ int main(int argc, char* args[])
       cout<<"Unable to set video mode: "<<SDL_GetError()<<endl;
       return 1;
     }
-
+    
+    //Initialize SDL_mixer
+    if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
+    {
+    	cout<<"Unable to initialize SDL_mixer: "<<SDL_GetError()<<endl;
+        return 1;
+    }
+    //Load  music
+    music = Mix_LoadMUS( "clinthammer.wav" );
+    //If problem loading  music
+    if( music == NULL )
+    {
+    	cout<<"Problem Loading Music: "<<SDL_GetError()<<endl;
+        return 1;
+    }
   deque<string> n;
   n.push_back("Zach");
   n.push_back("Kaitlin");
@@ -52,6 +71,11 @@ int main(int argc, char* args[])
 
   while(ss.getSelection()!=3)//while quit not selected
     {
+    	//Play the music
+       if( Mix_PlayMusic( music, -1 ) == -1 )
+       {
+       	return 1;
+       }
       switch( ss.getSelection() )
       {
 	    case 1: //play game
@@ -65,7 +89,10 @@ int main(int argc, char* args[])
 	}
       ss.display(screen);
     }
-
+    //Free music
+    Mix_FreeMusic( music );
+    //Quit SDL_mixer
+    Mix_CloseAudio();
   SDL_Quit();
 
   return 0;
