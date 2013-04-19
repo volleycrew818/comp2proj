@@ -16,8 +16,7 @@ using namespace std;
 
 //music
 Mix_Music *music = NULL;
-//music to be used
-Mix_Chunk *tune = NULL;
+
 int main(int argc, char* args[]) 
 {
   //initializes SDL
