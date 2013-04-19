@@ -72,7 +72,7 @@ void Ball::move() {
          }
     	xv=-xv;
     }
-
+}
 void Ball::draw(SDL_Surface* screen){
     SDL_Rect offset;
     offset.x = x;
