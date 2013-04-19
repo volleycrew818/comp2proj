@@ -2,6 +2,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include "ball.h"
+#include "SDL/SDL_mixer.h"
 using namespace std;
 
 SDL_Surface *screen = NULL;
